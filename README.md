@@ -29,9 +29,9 @@ This project is a simple **Term Deposit Calculator** built using **React.js**. I
 5. **Calculation Formula**:
 
    - For compounding interest (monthly, quarterly, annually):  
-     \( A = P \times (1 + \frac{r}{n})^{(n \times t)} \)
+     $$ A = P \times (1 + \frac{r}{n})^{(n \times t)} $$
    - For interest at maturity:  
-     \( A = P \times (1 + r \times t) \)
+     $$ A = P \times (1 + r \times t) $$
 
    Where:
 
