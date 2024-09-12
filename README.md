@@ -1,70 +1,153 @@
-# Getting Started with Create React App
+# 💸 Term Deposit Calculator 💸 - README
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Overview
 
-## Available Scripts
+This project is a simple **Term Deposit Calculator** built using **React.js**. It allows users to input an initial deposit amount, interest rate, investment term, and interest frequency (monthly, quarterly, annually, or at maturity). The calculator then computes the final balance at the end of the term using either simple interest or compound interest, depending on the selected frequency.
 
-In the project directory, you can run:
+### Assumptions
 
-### `npm start`
+1. **Deposit Amount**:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+   - Must be between $1,000 and $1,500,000.
+   - Invalid deposit amounts (e.g., negative values) will show an error message.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. **Interest Rate**:
 
-### `npm test`
+   - The valid range is between 0% and 15%.
+   - Invalid interest rates (e.g., negative or excessive values) will trigger an error.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. **Investment Term**:
 
-### `npm run build`
+   - The term must be between 3 months and 60 months (5 years).
+   - Invalid term durations will display an error.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. **Interest Frequency**:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   - You can select monthly, quarterly, annually, or at maturity.
+   - Interest at maturity is a special case where interest is calculated only once at the end of the term (simple interest).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. **Calculation Formula**:
 
-### `npm run eject`
+   - For compounding interest (monthly, quarterly, annually):  
+     \( A = P \times (1 + \frac{r}{n})^{(n \times t)} \)
+   - For interest at maturity:  
+     \( A = P \times (1 + r \times t) \)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   Where:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   - `P` is the principal amount (initial deposit).
+   - `r` is the annual interest rate (in decimal form).
+   - `n` is the number of times interest is compounded per year.
+   - `t` is the investment term in years.
+   - `A` is the final balance.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Project Structure
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **src/components/Calculator.js**: The main component implementing the Term Deposit Calculator.
+- **src/components/Calculator.test.js**: The test file that verifies the functionality of the calculator using unit tests with `@testing-library/react`.
 
-## Learn More
+## Installation & Setup
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Prerequisites
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Node.js** (>= 18.x.x)
+- **npm** (or **yarn**)
 
-### Code Splitting
+### Steps to Install and Run the Project
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. **Clone the Repository**
 
-### Analyzing the Bundle Size
+   ```
+   git clone https://github.com/rushabhBhagat/tdc.git
+   cd tdc
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+2. **Install Dependencies**
+   Using npm:
 
-### Making a Progressive Web App
+   ```
+   npm install
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+   Or using yarn:
 
-### Advanced Configuration
+   ```
+   yarn install
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+3. **Start the Development Server**
 
-### Deployment
+   ```
+   npm start
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+   Or using yarn:
 
-### `npm run build` fails to minify
+   ```
+   yarn start
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+   The application will be running on `http://localhost:3000`.
+
+## Running Tests
+
+Unit tests are written using `@testing-library/react` to verify the behavior of the calculator under various scenarios.
+
+### To Run the Tests:
+
+1. **Run Tests in Watch Mode** (automatically runs when files change):
+
+   ```
+   npm test
+   ```
+
+   Or using yarn:
+
+   ```
+   yarn test
+   ```
+
+2. **Run Tests Once**:
+   ```
+   npm test -- --watchAll=false
+   ```
+   Or using yarn:
+   ```
+   yarn test --watchAll=false
+   ```
+
+### Test Scenarios
+
+The test cases check:
+
+- The correct rendering of the component with initial values.
+- Correct updates when user inputs change (e.g., deposit amount, rate, etc.).
+- Calculations for different interest frequencies: monthly, quarterly, annually, and at maturity.
+- Proper error handling for invalid inputs (e.g., negative deposit or invalid term).
+
+## How to Use the Calculator
+
+1. **Deposit**: Enter the starting deposit amount (between $1,000 and $1,500,000).
+2. **Interest Rate**: Set the annual interest rate (between 0% and 15%).
+3. **Term**: Enter the investment term in months (between 3 and 60 months).
+4. **Interest Frequency**: Choose how often interest is compounded (monthly, quarterly, annually, or at maturity).
+5. **Calculate**: Click the "Calculate" button to compute the final balance.
+
+### Example Usage
+
+- Deposit: `$10,000`
+- Interest Rate: `5%`
+- Term: `12 months`
+- Interest Frequency: `Monthly`
+
+Click **Calculate**, and the final balance will be displayed on the screen.
+
+## Future Enhancements
+
+1. **Graphical Representation**: Add a chart to visually represent the growth of the deposit over time with compound interest. Show interest earned per year/month for better user insight.
+2. **Better UX**: Create a better UI/UX for all devices.
+3. **Better Errors**: Instead of using the input validation, show all the errors onSubmit handler for all the fields.
+
+## Conclusion
+
+This project provides a straightforward way to calculate the future value of a term deposit, including support for both simple and compound interest calculations. It includes comprehensive tests to ensure correct functionality under various scenarios.
